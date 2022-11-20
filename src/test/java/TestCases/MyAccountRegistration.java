@@ -66,12 +66,26 @@ public class MyAccountRegistration extends CommonMethod{
 		assertionTrueDisplay(cp.topMenuMyAccount);
 		choosingMenuItem(BaseClass.getProperty("chooseTopMenuMyAccount"));
 		sendKey(lp.registerUsernameInputBox, BaseClass.getProperty("newUsername"));
-		System.out.println("1");
 		sendKey(lp.registerPasswordInputBox, BaseClass.getProperty("blank"));
-		System.out.println("2");
 		click(lp.registerButton);
 
 		assertionTrueContainsText(lp.errorMessageBox, BaseClass.getProperty("expectedRegisterWithoutPassword"));
+		assertionTrueDisplay(lp.registerText);
+		assertionTrueDisplay(lp.registerButton);
+	}
+	
+	@Test(priority=5, enabled=true)
+	public void registrationWithEmptyIdAndPassword() {
+		choosingMenuItem(BaseClass.getProperty("chooseTopMenuShop"));
+		refresh();
+		wait.until(ExpectedConditions.elementToBeClickable(cp.topMenuMyAccount));
+		assertionTrueDisplay(cp.topMenuMyAccount);
+		choosingMenuItem(BaseClass.getProperty("chooseTopMenuMyAccount"));
+		sendKey(lp.registerUsernameInputBox, BaseClass.getProperty("blank"));
+		sendKey(lp.registerPasswordInputBox, BaseClass.getProperty("blank"));
+		click(lp.registerButton);
+
+		assertionTrueContainsText(lp.errorMessageBox, BaseClass.getProperty("expectedRegisterWithoutUsernameAndPassword"));
 		assertionTrueDisplay(lp.registerText);
 		assertionTrueDisplay(lp.registerButton);
 	}
